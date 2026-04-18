@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода - Прогноз погоды для городов</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="weather-background" id="weatherBackground">
+            <div class="stars"></div>
+            <div class="sun"></div>
+            <div class="clouds"></div>
+            <div class="rain"></div>
+            <div class="snow"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Header -->
+            <header class="header fade-in">
+                <h1 class="app-title">🌤 Погода</h1>
+                <p class="app-subtitle">Актуальный прогноз погоды по всему миру</p>
+            </header>
+
+            <!-- Search Section -->
+            <div class="search-container slide-up">
+                <div class="search-wrapper">
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        class="search-input" 
+                        placeholder="Введите название города..."
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" class="search-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Найти
+                    </button>
+                </div>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Загрузка данных о погоде...</p>
+            </div>
+
+            <!-- Weather Display -->
+            <div id="weatherDisplay" class="weather-display">
+                <!-- Current Location Info -->
+                <div class="location-info scale-in">
+                    <h2 id="cityName" class="city-name"></h2>
+                    <p id="currentDate" class="current-date"></p>
+                </div>
+
+                <!-- Main Weather Card -->
+                <div class="weather-card glass-morphism float-animation">
+                    <div class="weather-main">
+                        <div class="temperature-section">
+                            <div id="weatherIcon" class="weather-icon"></div>
+                            <div class="temp-value">
+                                <span id="temperature"></span>
+                                <span class="degree">°C</span>
+                            </div>
+                        </div>
+                        <div class="weather-description">
+                            <p id="weatherDescription" class="weather-text"></p>
+                            <p id="feelsLike" class="feels-like"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Details Grid -->
+                <div class="weather-details-grid">
+                    <div class="detail-card glass-morphism hover-lift">
+                        <div class="detail-icon">💨</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Ветер</p>
+                            <p id="windSpeed" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card glass-morphism hover-lift">
+                        <div class="detail-icon">💧</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Влажность</p>
+                            <p id="humidity" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card glass-morphism hover-lift">
+                        <div class="detail-icon">👁</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Видимость</p>
+                            <p id="visibility" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card glass-morphism hover-lift">
+                        <div class="detail-icon">🌡</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Давление</p>
+                            <p id="pressure" class="detail-value"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forecast Section -->
+                <div class="forecast-section">
+                    <h3 class="forecast-title">Прогноз на 5 дней</h3>
+                    <div id="forecastContainer" class="forecast-container">
+                        <!-- Forecast cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Message -->
+            <div id="defaultMessage" class="default-message fade-in">
+                <div class="message-content">
+                    <div class="message-icon">🌍</div>
+                    <h3>Добро пожаловать!</h3>
+                    <p>Введите название города, чтобы узнать актуальную погоду</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
