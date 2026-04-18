@@ -3,133 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Погода - Прогноз погоды для городов</title>
+    <title>Погода</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
-        <!-- Animated Background -->
+        <!-- Animated Rain Background -->
         <div class="weather-background" id="weatherBackground">
-            <div class="stars"></div>
-            <div class="sun"></div>
-            <div class="clouds"></div>
-            <div class="rain"></div>
-            <div class="snow"></div>
+            <div class="rain-container" id="rainContainer"></div>
+            <div class="lightning" id="lightning"></div>
         </div>
 
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+                </svg>
+            </div>
+            
+            <div class="nav-item active">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                </svg>
+                <span>Погода</span>
+            </div>
+            
+            <div class="nav-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 6h10M8 12h10M8 18h10M3 6h.01M3 12h.01M3 18h.01"/>
+                </svg>
+                <span>Города</span>
+            </div>
+            
+            <div class="nav-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3v18h18M9 3v18M15 3v18"/>
+                </svg>
+                <span>Карта</span>
+            </div>
+            
+            <div class="nav-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                <span>Настройки</span>
+            </div>
+        </nav>
+
         <!-- Main Content -->
-        <div class="content">
-            <!-- Header -->
-            <header class="header fade-in">
-                <h1 class="app-title">🌤 Погода</h1>
-                <p class="app-subtitle">Актуальный прогноз погоды по всему миру</p>
-            </header>
-
-            <!-- Search Section -->
-            <div class="search-container slide-up">
-                <div class="search-wrapper">
-                    <input 
-                        type="text" 
-                        id="cityInput" 
-                        class="search-input" 
-                        placeholder="Введите название города..."
-                        autocomplete="off"
-                    >
-                    <button id="searchBtn" class="search-button">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                        Найти
-                    </button>
-                </div>
-                <div id="errorMessage" class="error-message"></div>
+        <div class="main-content">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="cityInput" placeholder="Поиск городов..." autocomplete="off">
             </div>
 
-            <!-- Loading Indicator -->
-            <div id="loadingIndicator" class="loading-indicator">
-                <div class="spinner"></div>
-                <p>Загрузка данных о погоде...</p>
-            </div>
-
-            <!-- Weather Display -->
-            <div id="weatherDisplay" class="weather-display">
-                <!-- Current Location Info -->
-                <div class="location-info scale-in">
-                    <h2 id="cityName" class="city-name"></h2>
-                    <p id="currentDate" class="current-date"></p>
+            <!-- Weather Content -->
+            <div id="weatherContent" class="weather-content">
+                <!-- Current Weather -->
+                <div class="current-weather">
+                    <div class="weather-info">
+                        <h1 id="cityName" class="city-name">Мадрид</h1>
+                        <p id="rainChance" class="rain-chance">Вероятность дождя: 0%</p>
+                        <div class="temperature" id="temperature">31°</div>
+                    </div>
+                    <div class="weather-icon-large" id="weatherIcon">☀️</div>
                 </div>
 
-                <!-- Main Weather Card -->
-                <div class="weather-card glass-morphism float-animation">
-                    <div class="weather-main">
-                        <div class="temperature-section">
-                            <div id="weatherIcon" class="weather-icon"></div>
-                            <div class="temp-value">
-                                <span id="temperature"></span>
-                                <span class="degree">°C</span>
+                <!-- Hourly Forecast -->
+                <div class="hourly-forecast">
+                    <h3 class="section-title">ПРОГНОЗ НА СЕГОДНЯ</h3>
+                    <div id="hourlyContainer" class="hourly-container">
+                        <!-- Hourly items will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Air Conditions -->
+                <div class="air-conditions">
+                    <h3 class="section-title">УСЛОВИЯ ВОЗДУХА</h3>
+                    <button class="see-more-btn">Подробнее</button>
+                    <div class="conditions-grid">
+                        <div class="condition-item">
+                            <div class="condition-icon">🌡</div>
+                            <div class="condition-info">
+                                <p class="condition-label">Ощущается как</p>
+                                <p id="feelsLike" class="condition-value">30°</p>
                             </div>
                         </div>
-                        <div class="weather-description">
-                            <p id="weatherDescription" class="weather-text"></p>
-                            <p id="feelsLike" class="feels-like"></p>
+                        
+                        <div class="condition-item">
+                            <div class="condition-icon">💨</div>
+                            <div class="condition-info">
+                                <p class="condition-label">Ветер</p>
+                                <p id="windSpeed" class="condition-value">0.2 км/ч</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Weather Details Grid -->
-                <div class="weather-details-grid">
-                    <div class="detail-card glass-morphism hover-lift">
-                        <div class="detail-icon">💨</div>
-                        <div class="detail-info">
-                            <p class="detail-label">Ветер</p>
-                            <p id="windSpeed" class="detail-value"></p>
+                        
+                        <div class="condition-item">
+                            <div class="condition-icon">💧</div>
+                            <div class="condition-info">
+                                <p class="condition-label">Вероятность дождя</p>
+                                <p id="rainPercent" class="condition-value">0%</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="detail-card glass-morphism hover-lift">
-                        <div class="detail-icon">💧</div>
-                        <div class="detail-info">
-                            <p class="detail-label">Влажность</p>
-                            <p id="humidity" class="detail-value"></p>
+                        
+                        <div class="condition-item">
+                            <div class="condition-icon">☀️</div>
+                            <div class="condition-info">
+                                <p class="condition-label">УФ-индекс</p>
+                                <p id="uvIndex" class="condition-value">3</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="detail-card glass-morphism hover-lift">
-                        <div class="detail-icon">👁</div>
-                        <div class="detail-info">
-                            <p class="detail-label">Видимость</p>
-                            <p id="visibility" class="detail-value"></p>
-                        </div>
-                    </div>
-
-                    <div class="detail-card glass-morphism hover-lift">
-                        <div class="detail-icon">🌡</div>
-                        <div class="detail-info">
-                            <p class="detail-label">Давление</p>
-                            <p id="pressure" class="detail-value"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Forecast Section -->
-                <div class="forecast-section">
-                    <h3 class="forecast-title">Прогноз на 5 дней</h3>
-                    <div id="forecastContainer" class="forecast-container">
-                        <!-- Forecast cards will be inserted here -->
                     </div>
                 </div>
             </div>
 
-            <!-- Default Message -->
-            <div id="defaultMessage" class="default-message fade-in">
-                <div class="message-content">
-                    <div class="message-icon">🌍</div>
-                    <h3>Добро пожаловать!</h3>
-                    <p>Введите название города, чтобы узнать актуальную погоду</p>
+            <!-- 7-Day Forecast Sidebar -->
+            <div class="forecast-sidebar">
+                <h3 class="section-title">ПРОГНОЗ НА 7 ДНЕЙ</h3>
+                <div id="forecastContainer" class="forecast-list">
+                    <!-- Forecast items will be inserted here -->
                 </div>
             </div>
         </div>
